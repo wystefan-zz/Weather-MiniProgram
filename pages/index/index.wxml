@@ -1,6 +1,6 @@
 
 <view class="weather-wrapper">
-  <view class="temp">12°</view>
-  <view class="weather">sunny</view>
+  <view class="temp">{{nowTemp}}</view> 
+  <view class="weather">{{nowWeather}}</view>
   <image class="weather-bg" src="/images/sunny-bg.png" mode="scaleToFill"></image>
 </view>
