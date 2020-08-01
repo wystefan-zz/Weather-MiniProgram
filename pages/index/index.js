@@ -5,15 +5,25 @@ const weatherMap = {
   'sunny': 'sunny',
   'cloudy': 'cloudy',
   'overcast': 'overcast',
-  'lighttrain': 'light rain',
+  'lightrain': 'light rain',
   'heavyrain': 'heavy rain',
   'snow': 'snow'
 }
 
+const weatherColorMap = {
+  'sunny': '#cbeefd',
+  'cloudy': '#deeef6',
+  'overcast': '#c6ced2',
+  'lightrain': '#bdd5e1',
+  'heavyrain': '#c5ccd0',
+  'snow': '#aae1fc'
+}
+
 Page({
   data: {
-    nowTemp: '14',
-    nowWeather: 'cloundy'
+    nowTemp: '',
+    nowWeather: '',
+    nowWeatherBg: ''
   },
   onLoad() {
     let that = this;
@@ -29,8 +39,14 @@ Page({
         console.log(temp, weather);
         that.setData({
           nowTemp: temp + '°',
-          nowWeather: weatherMap[weather]
+          nowWeather: weatherMap[weather],
+          nowWeatherBg: '/images/' + weather + '-bg.png'
         });
+
+        wx.setNavigationBarColor({
+          frontColor: '#000000',
+          backgroundColor: weatherColorMap[weather]
+        })
       }
     })
   }
