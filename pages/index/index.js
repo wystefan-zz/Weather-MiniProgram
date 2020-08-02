@@ -46,39 +46,45 @@ Page({
       },
       success: function (res) {
         let result = res.data.result;
-        let temp = result.now.temp;
-        let weather = result.now.weather;
-        console.log(temp, weather);
-        that.setData({
-          nowTemp: temp + '°',
-          nowWeather: weatherMap[weather],
-          nowWeatherBg: '/images/' + weather + '-bg.png'
-        });
-
-        wx.setNavigationBarColor({
-          frontColor: '#000000',
-          backgroundColor: weatherColorMap[weather]
-        })
-
-        let hourlyWeather = [];
-        let nowHour = new Date().getHours();
-        let forecast = result.forecast;
-        for ( let i=0; i < 24; i+=3) {
-          hourlyWeather.push({
-            time:(i + nowHour) % 24 + ":00",
-            iconPath: '/images/' + forecast[i/3].weather + '-icon.png',
-            temp: forecast[i/3].temp + '°'
-          })
-        }
-        hourlyWeather[0].time = "Now";
-        that.setData({
-          hourlyWeather
-        })
+        that.setNow(result);
+        that.setHourlyWeather(result);
       },
-
       complete: () => {
         callback && callback();
       }
     })
+  },
+
+  setNow(result) {
+    let temp = result.now.temp;
+    let weather = result.now.weather;
+    this.setData({
+      nowTemp: temp + '°',
+      nowWeather: weatherMap[weather],
+      nowWeatherBg: '/images/' + weather + '-bg.png'
+    });
+
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: weatherColorMap[weather]
+    })
+  },
+
+  setHourlyWeather(result) {
+    let hourlyWeather = [];
+    let nowHour = new Date().getHours();
+    let forecast = result.forecast;
+    for ( let i=0; i < 24; i+=3) {
+      hourlyWeather.push({
+        time:(i + nowHour) % 24 + ":00",
+        iconPath: '/images/' + forecast[i/3].weather + '-icon.png',
+        temp: forecast[i/3].temp + '°'
+      })
+    }
+    hourlyWeather[0].time = "Now";
+    this.setData({
+      hourlyWeather
+    })
   }
+  
 })
