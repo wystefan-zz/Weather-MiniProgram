@@ -23,7 +23,8 @@ Page({
   data: {
     nowTemp: '',
     nowWeather: '',
-    nowWeatherBg: ''
+    nowWeatherBg: '',
+    hourlyWeather: []
   },
 
   onPullDownRefresh() {
@@ -58,8 +59,23 @@ Page({
           frontColor: '#000000',
           backgroundColor: weatherColorMap[weather]
         })
+
+        let hourlyWeather = [];
+        let nowHour = new Date().getHours();
+        let forecast = result.forecast;
+        for ( let i=0; i < 24; i+=3) {
+          hourlyWeather.push({
+            time:(i + nowHour) % 24 + ":00",
+            iconPath: '/images/' + forecast[i/3].weather + '-icon.png',
+            temp: '12°'
+          })
+        }
+        hourlyWeather[0].time = "Now";
+        that.setData({
+          hourlyWeather
+        })
       },
-      
+
       complete: () => {
         callback && callback();
       }
