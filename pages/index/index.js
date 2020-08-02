@@ -24,7 +24,9 @@ Page({
     nowTemp: '',
     nowWeather: '',
     nowWeatherBg: '',
-    hourlyWeather: []
+    hourlyWeather: [],
+    todayTemp: '',
+    todayDate: ''
   },
 
   onPullDownRefresh() {
@@ -48,6 +50,7 @@ Page({
         let result = res.data.result;
         that.setNow(result);
         that.setHourlyWeather(result);
+        that.setToday(result);
       },
       complete: () => {
         callback && callback();
@@ -85,6 +88,14 @@ Page({
     this.setData({
       hourlyWeather
     })
+  },
+
+  setToday(result) {
+    let date = new Date();
+    this.setData({
+      todayTemp: `${result.today.minTemp}° - ${result.today.maxTemp}°` ,
+      todayDate: `${date.getFullYear()} - ${date.getMonth() + 1} - ${date.getDate()} Today`
+    });
   }
   
 })
