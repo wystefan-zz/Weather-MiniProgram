@@ -25,7 +25,18 @@ Page({
     nowWeather: '',
     nowWeatherBg: ''
   },
+
+  onPullDownRefresh() {
+    this.getNow(() => {
+      wx.stopPullDownRefresh();
+    });
+  },
+
   onLoad() {
+    this.getNow();
+  },
+
+  getNow(callback) {
     let that = this;
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
@@ -47,6 +58,10 @@ Page({
           frontColor: '#000000',
           backgroundColor: weatherColorMap[weather]
         })
+      },
+      
+      complete: () => {
+        callback && callback();
       }
     })
   }

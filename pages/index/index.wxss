@@ -14,6 +14,8 @@
 
 .weather-wrapper {
   position: relative;
+  padding-top: 174rpx;
+  padding-bottom: 250rpx;
 }
 
 .weather-bg {
@@ -21,6 +23,25 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 150%;
+  height: 100%;
   z-index: -1;
 }
+
+.timetips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.timetips-icon {
+  margin-right: 10rpx;
+  width: 36rpx;
+  height: 28rpx;
+}
+
+.timetips-text {
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.5;
+  }
