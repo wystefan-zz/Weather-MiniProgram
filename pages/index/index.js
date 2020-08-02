@@ -67,7 +67,7 @@ Page({
           hourlyWeather.push({
             time:(i + nowHour) % 24 + ":00",
             iconPath: '/images/' + forecast[i/3].weather + '-icon.png',
-            temp: '12°'
+            temp: forecast[i/3].temp + '°'
           })
         }
         hourlyWeather[0].time = "Now";
