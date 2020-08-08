@@ -100,3 +100,28 @@
     width: 13rpx;
     height: 24rpx;
   }
+
+  .location{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-icon{
+  margin-right: 10rpx;
+  width: 21rpx;
+  height: 30rpx;
+}
+
+.location-tips{
+  height: 42rpx; /*fixed height, there is height, whether or not there is a word*/
+  margin-top:10rpx;
+  text-align: center;
+}
+
+.location-wrapper{
+  margin-bottom: 60rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: rgba(0, 0, 0, 0.5)
+}
